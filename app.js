@@ -40,10 +40,41 @@ app.get('/', (req, res) => {
   restaurant.find()
     .lean()
     .then((restaurants) => {
-      console.log(restaurants);
       res.render('index', { restaurants });
     })
     .catch((error) => console.error(error));
+});
+
+// CREATE Operation
+app.get('/restaurants/new', (req, res) => res.render('new'));
+app.post('/restaurants', (req, res) => {
+  // The the posted name
+  const { name } = req.body;
+  const { name_en } = req.body;
+  const { category } = req.body;
+  const { image } = req.body;
+  const { location } = req.body;
+  const { phone } = req.body;
+  const { google_map } = req.body;
+  const { rating } = req.body;
+  const { description } = req.body;
+
+  // Created the instance
+  const restaurants = new restaurant({
+    name,
+    name_en,
+    category,
+    image,
+    location,
+    phone,
+    google_map,
+    rating,
+    description,
+  });
+
+  return restaurants.save()
+    .then(() => res.redirect('/')
+      .catch((error) => console.error(error)));
 });
 
 // READ restaurant info
