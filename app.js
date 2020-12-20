@@ -4,6 +4,7 @@ const express = require('express');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const restaurant = require('./models/restaurant');
 
 const app = express();
 const port = 3000;
@@ -24,7 +25,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 // DB Connection
-mongoose.connect('mongodb://localhost/favourite-restaurant', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 db.on('error', () => {
@@ -36,13 +37,31 @@ db.once('open', () => {
 
 // routes setting
 app.get('/', (req, res) => {
-  res.render('index');
+  restaurant.find()
+    .lean()
+    .then((restaurants) => {
+      console.log(restaurants);
+      res.render('index', { restaurants });
+    })
+    .catch((error) => console.error(error));
 });
 
-app.post('/', (req, res) => {
-  console.log('get form POST request');
-  console.log('req.body', req.body);
-  res.render('index');
+app.get('/search/', (req, res) => {
+  const { keyword } = req.query;
+  // search based on name, name_en, category, and location
+  restaurant.find({
+    $or: [
+      { name: { $regex: keyword } },
+      { name_en: { $regex: keyword } },
+      { category: { $regex: keyword } },
+      { location: { $regex: keyword } },
+    ],
+  })
+    .lean()
+    .then((restaurants) => {
+      res.render('index', { restaurants, keyword });
+    })
+    .catch((error) => console.error(error));
 });
 
 // start and listen on the Express server
