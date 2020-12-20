@@ -1,0 +1,44 @@
+<form action="/restaurants/{{ restaurants._id }}/edit" method="POST" class="container mt-5 mb-4">
+  <div class="form-group">
+    <label for="name">餐廳名稱</label>
+    <input type="text" class="form-control" placeholder="餐廳名稱" name="name" value="{{ restaurants.name }}">
+  </div>
+  <div class="form-group">
+    <label for="name_en">餐廳英文名稱</label>
+    <input type="text" class="form-control" placeholder="餐廳英文名稱" name="name_en" value="{{ restaurants.name_en }}">
+  </div>
+  <div class="form-group">
+    <label for="category">料理類別</label>
+    <input type="text" class="form-control" placeholder="料理類別" name="category" value="{{ restaurants.category }}">
+  </div>
+  <div class="form-group">
+    <label for="image">照片URL</label>
+    <input type="url" class="form-control" placeholder="照片URL" name="image" value="{{ restaurants.image }}">
+  </div>
+  <div class="form-group">
+    <label for="location">地址</label>
+    <input type="text" class="form-control" placeholder="地址" name="location" value="{{ restaurants.location }}">
+  </div>
+  <div class="form-group">
+    <label for="phone">聯絡號碼</label>
+    <input type="tel" class="form-control" placeholder="聯絡號碼" name="phone" value="{{ restaurants.phone }}">
+  </div>
+  <div class="form-group">
+    <label for="google_map">Google Maps URL</label>
+    <input type="url" class="form-control" placeholder="Google Maps URL" name="google_map" value="{{ restaurants.google_map }}">
+  </div>
+  <div class="form-group">
+    <label for="rating">評比分數</label>
+    <input type="number" class="form-control" placeholder="評比分數" name="rating" value="{{ restaurants.rating }}">
+  </div>
+  <div class="form-group">
+    <label for="description">簡介</label>
+    <textarea name="description" class="form-control" rows="5">{{#if restaurants.description }} {{restaurants.description}} {{/if}}</textarea>
+  </div>
+  <div class="form-group">
+    
+    
+  </div>
+  <button type="submit" class="btn btn-success">Save</button>
+  <a href="/" class="btn btn-danger">back</a>
+</form>

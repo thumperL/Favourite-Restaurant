@@ -46,7 +46,7 @@ app.get('/', (req, res) => {
     .catch((error) => console.error(error));
 });
 
-// restaurant details page
+// READ restaurant info
 app.get('/restaurants/:restaurantId', (req, res) => {
   const { restaurantId } = req.params;
   return restaurant.findById(restaurantId)
@@ -57,6 +57,43 @@ app.get('/restaurants/:restaurantId', (req, res) => {
     .catch((error) => console.log(error));
 });
 
+// UPDATE operation
+app.get('/restaurants/:restaurantId/edit', (req, res) => {
+  const { restaurantId } = req.params;
+  return restaurant.findById(restaurantId)
+    .lean()
+    .then((restaurants) => res.render('edit', { restaurants }))
+    .catch((error) => console.log(error));
+});
+app.post('/restaurants/:restaurantId/edit', (req, res) => {
+  const { restaurantId } = req.params;
+  const { name } = req.body;
+  const { name_en } = req.body;
+  const { category } = req.body;
+  const { image } = req.body;
+  const { location } = req.body;
+  const { phone } = req.body;
+  const { google_map } = req.body;
+  const { rating } = req.body;
+  const { description } = req.body;
+  return restaurant.findById(restaurantId)
+    .then((restaurants) => {
+      restaurants.name = name;
+      restaurants.name_en = name_en;
+      restaurants.category = category;
+      restaurants.image = image;
+      restaurants.location = location;
+      restaurants.phone = phone;
+      restaurants.google_map = google_map;
+      restaurants.rating = rating;
+      restaurants.description = description;
+      return restaurants.save();
+    })
+    .then(() => res.redirect(`/restaurants/${restaurantId}`))
+    .catch((error) => console.log(error));
+});
+
+// SEARCH and LIST restaurants
 app.get('/search/', (req, res) => {
   const { keyword } = req.query;
   // search based on name, name_en, category, and location
