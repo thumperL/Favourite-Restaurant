@@ -21,7 +21,7 @@ const restaurantImage = [
 
 db.once('open', () => {
   console.log('mongodb connected!');
-  for (let i = 0; i < 10; i += 1) {
+  for (let i = 0; i < 12; i += 1) {
     restaurant.create({
       name: `餐廳名稱 ${i}`,
       name_en: `Restaurant Name ${i}`,
