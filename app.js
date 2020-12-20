@@ -136,13 +136,14 @@ app.post('/restaurants/:restaurantId/delete', (req, res) => {
 // SEARCH and LIST restaurants
 app.get('/search/', (req, res) => {
   const { keyword } = req.query;
+  const regex = new RegExp(keyword, 'i'); // Have to use RegExp builder to build the if contains string filtering
   // search based on name, name_en, category, and location
   restaurant.find({
     $or: [
-      { name: { $regex: keyword } },
-      { name_en: { $regex: keyword } },
-      { category: { $regex: keyword } },
-      { location: { $regex: keyword } },
+      { name: { $regex: regex } },
+      { name_en: { $regex: regex } },
+      { category: { $regex: regex } },
+      { location: { $regex: regex } },
     ],
   })
     .lean()
