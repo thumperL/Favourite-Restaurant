@@ -9,6 +9,7 @@
 3. 使用者可以瀏覽全部所有餐廳
 4. 使用者可以修改一家餐廳的資訊
 5. 使用者可以刪除一家餐廳
+6. 使用者可以搜尋一家餐廳
 
 ## Prerequisites - 系統需求
 
@@ -29,6 +30,11 @@ nvm use 14.15.1
 4. In [Terminal], cd to the extracted [MongoDB] folder.  Then run the following in [Terminal] to create a folder same level as the [MongoDB] folder. - 在MongoDB的同一層利用以下command在[Terminal]中建立一個新的data資料夾
 ```
 mkdir ../mongodb-data
+```
+
+4. Prepare [MongoDB] Database with sample data. Run the command below in terminal - 預先加入Sample data，請在終端機執行以下指令
+```
+npm run seed
 ```
 
 5. Start the web application, run the command below in terminal - 啟動專案，請在終端機執行以下指令
