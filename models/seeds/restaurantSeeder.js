@@ -21,7 +21,7 @@ const restaurantImage = [
 
 db.once('open', () => {
   console.log('mongodb connected!');
-  for (let i = 0; i < 12; i += 1) {
+  for (let i = 0; i < 11; i += 1) {
     restaurant.create({
       name: `餐廳名稱 ${i}`,
       name_en: `Restaurant Name ${i}`,
@@ -34,5 +34,16 @@ db.once('open', () => {
       description: `desc ${i}`,
     });
   }
+  restaurant.create({
+    name: '皇家披薩',
+    name_en: 'Royal Pizza',
+    category: '義式餐廳',
+    image: 'https://i1.wp.com/img.vivawei.tw/20170528010430_91.jpg',
+    location: '台北市德行東路192之1',
+    phone: '+886 2 2833 1505',
+    google_map: 'https://goo.gl/maps/FDP2QNqGMcQ3BBS4A',
+    rating: 5,
+    description: '皇家比薩位於天母洋食群聚之處還能佔有一席之地，憑藉的就是「我們不是大公司、但很實在」的理念，讓街坊鄰居吃過後都讚不絕口。',
+  });
   console.log('done');
 });
