@@ -46,6 +46,17 @@ app.get('/', (req, res) => {
     .catch((error) => console.error(error));
 });
 
+// restaurant details page
+app.get('/restaurants/:restaurantId', (req, res) => {
+  const { restaurantId } = req.params;
+  return restaurant.findById(restaurantId)
+    .lean()
+    .then((restaurants) => {
+      res.render('showmore', { restaurants });
+    })
+    .catch((error) => console.log(error));
+});
+
 app.get('/search/', (req, res) => {
   const { keyword } = req.query;
   // search based on name, name_en, category, and location
