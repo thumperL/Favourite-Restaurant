@@ -93,6 +93,15 @@ app.post('/restaurants/:restaurantId/edit', (req, res) => {
     .catch((error) => console.log(error));
 });
 
+// DELETE operation
+app.post('/restaurants/:restaurantId/delete', (req, res) => {
+  const { restaurantId } = req.params;
+  return restaurant.findById(restaurantId)
+    .then((restaurants) => restaurants.remove())
+    .then(() => res.redirect('/'))
+    .catch((error) => console.log(error));
+});
+
 // SEARCH and LIST restaurants
 app.get('/search/', (req, res) => {
   const { keyword } = req.query;
