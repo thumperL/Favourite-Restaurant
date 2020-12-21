@@ -73,8 +73,8 @@ app.post('/restaurants', (req, res) => {
   });
 
   return restaurants.save()
-    .then(() => res.redirect('/')
-      .catch((error) => console.error(error)));
+    .then(() => res.redirect('/'))
+    .catch((error) => console.error(error));
 });
 
 // READ restaurant info
