@@ -59,6 +59,24 @@ app.post('/restaurants', (req, res) => {
   const { rating } = req.body;
   const { description } = req.body;
 
+  if (name.length === 0 || name_en.length === 0 || category.length === 0 || image.length === 0 || location.length === 0) {
+    let errorMsg = '請輸入';
+    if (name.length === 0) {
+      errorMsg += ' 餐廳名稱 ';
+    } else if (name_en.length === 0) {
+      errorMsg += ' 餐廳英文名稱 ';
+    } else if (category.length === 0) {
+      errorMsg += ' 料理類別 ';
+    } else if (image.length === 0) {
+      errorMsg += ' 照片URL ';
+    } else if (location.length === 0) {
+      errorMsg += ' 地址 ';
+    }
+    return res.render('new', {
+      name, name_en, category, image, location, phone, google_map, rating, description, errorMsg,
+    });
+  }
+
   // Created the instance
   const restaurants = new restaurant({
     name,
@@ -107,6 +125,26 @@ app.post('/restaurants/:restaurantId/edit', (req, res) => {
   const { google_map } = req.body;
   const { rating } = req.body;
   const { description } = req.body;
+
+  if (name.length === 0 || name_en.length === 0 || category.length === 0 || image.length === 0 || location.length === 0) {
+    let errorMsg = '請輸入';
+    if (name.length === 0) {
+      errorMsg += ' 餐廳名稱 ';
+    } else if (name_en.length === 0) {
+      errorMsg += ' 餐廳英文名稱 ';
+    } else if (category.length === 0) {
+      errorMsg += ' 料理類別 ';
+    } else if (image.length === 0) {
+      errorMsg += ' 照片URL ';
+    } else if (location.length === 0) {
+      errorMsg += ' 地址 ';
+    }
+    return restaurant.findById(restaurantId)
+      .lean()
+      .then((restaurants) => res.render('edit', { restaurants, errorMsg }))
+      .catch((error) => console.log(error));
+  }
+
   return restaurant.findById(restaurantId)
     .then((restaurants) => {
       restaurants.name = name;
