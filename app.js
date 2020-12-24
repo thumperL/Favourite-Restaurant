@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const restaurant = require('./models/restaurant');
+const validator = require("./middleware");
 
 const app = express();
 const port = 3000;
@@ -47,7 +48,7 @@ app.get('/', (req, res) => {
 
 // CREATE Operation
 app.get('/restaurants/new', (req, res) => res.render('new'));
-app.post('/restaurants', (req, res) => {
+app.post('/restaurants', validator.createRestaurant, (req, res) => {
   // The the posted name
   const { name } = req.body;
   const { name_en } = req.body;
@@ -58,25 +59,7 @@ app.post('/restaurants', (req, res) => {
   const { google_map } = req.body;
   const { rating } = req.body;
   const { description } = req.body;
-
-  if (name.length === 0 || name_en.length === 0 || category.length === 0 || image.length === 0 || location.length === 0) {
-    let errorMsg = '請輸入';
-    if (name.length === 0) {
-      errorMsg += ' 餐廳名稱 ';
-    } else if (name_en.length === 0) {
-      errorMsg += ' 餐廳英文名稱 ';
-    } else if (category.length === 0) {
-      errorMsg += ' 料理類別 ';
-    } else if (image.length === 0) {
-      errorMsg += ' 照片URL ';
-    } else if (location.length === 0) {
-      errorMsg += ' 地址 ';
-    }
-    return res.render('new', {
-      name, name_en, category, image, location, phone, google_map, rating, description, errorMsg,
-    });
-  }
-
+  
   // Created the instance
   const restaurants = new restaurant({
     name,
