@@ -1,5 +1,5 @@
 {
-  "name": "A6_restaurant_list",
+  "name": "A6_Restaurant_List",
   "version": "1.0.0",
   "description": "利用MongoDB去製作的美食餐廳清單系統。",
   "main": "app.js",
