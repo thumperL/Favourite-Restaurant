@@ -1,44 +1,46 @@
 // 引用上方的validator library
-const validator = require("../libs/validate");
+const validator = require('../libs/validate');
 
 const createRestaurant = async (req, res, next) => {
-  
   const validation_rule = {
-      // body params
-      name: "required|string|min:5",
-      name_en : "required|string",
-      category : "required|string",
-      image : "required|url",
-      location : "required|string",
-      google_map: "required|url",  // 故意加入多一個required，所以HTML5不會擋掉
+    // body params
+    name: 'required|string|min:5',
+    name_en: 'required|string',
+    category: 'required|string',
+    image: 'required|url',
+    location: 'required|string',
   };
-  
-  const request_data = { 
-   ...req.params,
-   ...req.query,
-   ...req.body
+
+  const request_data = {
+    ...req.params,
+    ...req.query,
+    ...req.body,
   };
-  
+
   try {
     await validator(
-      request_data, 
-      validation_rule, 
-      {}, 
+      request_data,
+      validation_rule,
+      {},
       (err, status) => {
         if (err || !status) {
-          return res.status(412).json({
-            status: "error",
-            message: err,
-          });
-        } else {
-          next();
+          return res.render(
+            'restaurantForm',
+            {
+              restaurantData: req.body,
+              status: 'error',
+              error: err.errors,
+            },
+          );
         }
-    });
-  } catch(error) {
+        next();
+      },
+    );
+  } catch (error) {
     return res.status(500).json({
-      status: "error",
+      status: 'error',
       message: error.message,
     });
   }
-}
+};
 module.exports = { createRestaurant };
