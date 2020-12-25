@@ -1,14 +1,5 @@
-const mongoose = require('mongoose');
 const restaurant = require('../restaurant');
-
-mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on('error', () => {
-  console.log('mongodb error!');
-});
-db.once('open', () => {
-  console.log('mongodb connected!');
-});
+const db = require('../../config/mongoose');
 
 const restaurantCategory = ['中東料理', '日本料理', '義式餐廳', '美式餐廳', '酒吧', '咖啡'];
 const restaurantImage = [
@@ -45,5 +36,5 @@ db.once('open', () => {
     rating: 5,
     description: '皇家比薩位於天母洋食群聚之處還能佔有一席之地，憑藉的就是「我們不是大公司、但很實在」的理念，讓街坊鄰居吃過後都讚不絕口。',
   });
-  console.log('done');
+  console.log('Seeder Import Completed');
 });
