@@ -7,9 +7,23 @@ const restaurant = require('../../models/restaurant');
 
 // 定義首頁路由
 router.get('/', (req, res) => {
+  const restaurantSort = (req.query.restaurantSort === undefined) ? 'asc' : req.query.restaurantSort;
+  const sort = [];
+  switch (restaurantSort) {
+    case 'byType':
+      sort.push({ category: 'asc' });
+      break;
+    case 'byArea':
+      sort.push({ location: 'asc' });
+      break;
+    default:
+      sort.push({ _id: restaurantSort });
+      break;
+  }
+
   restaurant.find()
     .lean()
-    .sort({ _id: 'asc' })
+    .sort(...sort)
     .then((restaurants) => res.render('index', { restaurants }))
     .catch((error) => console.error(error));
 });

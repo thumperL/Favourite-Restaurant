@@ -8,6 +8,20 @@ const restaurant = require('../../models/restaurant');
 // 定義 search 路由
 router.get('/', (req, res) => {
   const { keyword } = req.query;
+  const restaurantSort = (req.query.restaurantSort === undefined) ? 'asc' : req.query.restaurantSort;
+  const sort = [];
+  switch (restaurantSort) {
+    case 'byType':
+      sort.push({ category: 'asc' });
+      break;
+    case 'byArea':
+      sort.push({ location: 'asc' });
+      break;
+    default:
+      sort.push({ _id: restaurantSort });
+      break;
+  }
+
   const regex = new RegExp(keyword, 'i'); // Have to use RegExp builder to build the if contains string filtering
   // search based on name, name_en, category, and location
   restaurant.find({
@@ -19,6 +33,7 @@ router.get('/', (req, res) => {
     ],
   })
     .lean()
+    .sort(...sort)
     .then((restaurants) => {
       res.render('index', { restaurants, keyword });
     })
