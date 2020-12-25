@@ -3,36 +3,38 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-10 col-12 mx-auto">
-      <div class="card-columns">
+      <div class="row">
         {{#each restaurants}}
-          <div class="card mb-3">
-            <a href="/restaurants/{{ this._id }}" class="text-secondary">
-              <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
-            </a>
-            <div class="card-body p-3">
+          <div class="col-4">
+            <div class="card mb-3">
               <a href="/restaurants/{{ this._id }}" class="text-secondary">
-                <h6 class="card-title mb-1">{{ this.name }}</h6>
+                <img class="card-img-top" src="{{ this.image }}" alt="{{ this.name }}">
               </a>
-
-              <div class="restaurant-category mb-1">
-                <i class="fas fa-utensils pr-2"></i> {{ this.category }}
-              </div>
-
-              <span class="badge badge-pill badge-danger font-weight-normal">
-                {{ this.rating }}
-                <i class="fas fa-star fa-xs"></i>
-              </span>
-
-              <div class="float-right">
-                <a href="./restaurants/{{ this._id }}" class="btn btn-outline-info btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="View more">
-                  <i class="fas fa-info"></i>
+              <div class="card-body p-3">
+                <a href="/restaurants/{{ this._id }}" class="text-secondary">
+                  <h6 class="card-title mb-1">{{ this.name }}</h6>
                 </a>
-                <a href="./restaurants/{{ this._id }}/edit" class="btn btn-outline-primary btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="Edit the restaurant">
-                  <i class="fas fa-edit"></i>
-                </a>
-                <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
-                  <button class="btn btn-outline-danger btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="Delete the restaurant" type="submit"><i class="far fa-trash-alt"></i></button>
-                </form>
+
+                <div class="restaurant-category mb-1">
+                  <i class="fas fa-utensils pr-2"></i> {{ this.category }}
+                </div>
+
+                <span class="badge badge-pill badge-danger font-weight-normal">
+                  {{ this.rating }}
+                  <i class="fas fa-star fa-xs"></i>
+                </span>
+
+                <div class="float-right">
+                  <a href="./restaurants/{{ this._id }}" class="btn btn-outline-info btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="View more">
+                    <i class="fas fa-info"></i>
+                  </a>
+                  <a href="./restaurants/{{ this._id }}/edit" class="btn btn-outline-primary btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="Edit the restaurant">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                    <button class="btn btn-outline-danger btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="Delete the restaurant" type="submit"><i class="far fa-trash-alt"></i></button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
