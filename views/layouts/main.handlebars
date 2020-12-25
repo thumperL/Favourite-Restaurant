@@ -26,7 +26,7 @@
   </header>
 
   <!-- search bar -->
-  <div class="container search-bar">
+  <div class="container search-bar sort-box d-flex justify-content-around align-items-center">
     <div class="search-bar-outer">
       <div class="search-bar-inner">
         <form action="/search">
@@ -39,6 +39,18 @@
             </div>
           </div>
         </form>
+      </div>
+    </div>
+    <div class="dropdown show restaurantSort">
+      <a class="btn btn-outline-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        排序方式
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <div class="dropdown-item" data-href="ASC">A - Z</div>
+        <div class="dropdown-item" data-href="DESC">Z - A</div>
+        <div class="dropdown-item" data-href="byType">類別</div>
+        <div class="dropdown-item" data-href="byArea">地區</div>
       </div>
     </div>
   </div>
