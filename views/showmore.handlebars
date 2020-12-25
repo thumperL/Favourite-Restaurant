@@ -5,7 +5,7 @@
       <a href="/restaurants/{{ restaurants._id }}/edit" class="btn btn-outline-primary pt-0 pb-0">
         <i class="fas fa-edit"></i> Edit 
       </a>
-      <form action="/restaurants/{{ restaurants._id }}/delete" method="POST" style="display: inline;">
+      <form action="/restaurants/{{ restaurants._id }}?_method=DELETE" method="POST" style="display: inline;">
         <button class="btn btn-outline-danger pt-0 pb-0" type="submit"><i class="far fa-trash-alt"></i> Delete </button>
       </form>
       <a class="btn btn-outline-secondary pt-0 pb-0" href="/">back</a>
