@@ -4,13 +4,17 @@ const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const methodOverride = require('method-override'); // 載入 method-override
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
 const restaurant = require('./models/restaurant');
 const validator = require('./middleware');
 const routes = require('./routes'); // 引用路由器
 require('./config/mongoose');
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 // serving static files
 app.use(express.static('public'));
