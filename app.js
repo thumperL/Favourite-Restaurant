@@ -4,11 +4,14 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-const methodOverride = require('method-override'); // 載入 method-override
+const methodOverride = require('method-override');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
+const usePassport = require('./config/passport');
+
+usePassport(app);
 const restaurant = require('./models/restaurant');
 const validator = require('./middleware');
 const routes = require('./routes'); // 引用路由器
@@ -34,6 +37,7 @@ app.use(session({
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
+usePassport(app);
 app.use(methodOverride('_method'));
 app.use(routes);
 

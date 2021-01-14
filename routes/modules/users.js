@@ -9,9 +9,10 @@ const User = require('../../models/user');
 router.get('/login', (req, res) => {
   res.render('login');
 });
-router.post('/login', (req, res, next) => {
-
-});
+router.post('/login', passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/users/login',
+}));
 
 // Logout
 router.get('/logout', (req, res) => {
