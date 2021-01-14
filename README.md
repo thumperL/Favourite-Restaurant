@@ -1,6 +1,6 @@
-# 美食餐廳清單 (MongoDB CRUD版) - Favourite Restaurant List (MongoDB CRUD version)
+# 美食餐廳清單 - Favourite Restaurant List
 
-利用MongoDB去製作的美食餐廳清單系統。
+個人餐廳清單系統，使用者登入後可以增加自己的餐廳。
 
 ## Features - 產品功能
 
@@ -10,6 +10,8 @@
 4. 使用者可以修改一家餐廳的資訊
 5. 使用者可以刪除一家餐廳
 6. 使用者可以搜尋一家餐廳
+7. 使用者可以使用Email登入
+8. 使用者可以使用Facebook登入
 
 ## Prerequisites - 系統需求
 
