@@ -1,5 +1,6 @@
 // require packages used in the project
 const express = require('express');
+const session = require('express-session');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -23,12 +24,17 @@ app.engine('handlebars', exphbs({
   defaultLayout: 'main',
 }));
 app.set('view engine', 'handlebars');
+
+// Setup sessions, POSTs body parser, use methodOverride to RESTify requests, then add ROUTER
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+}));
 app.use(bodyParser.urlencoded({
   extended: true,
 }));
-// 設定每一筆請求都會透過 methodOverride 進行前置處理
 app.use(methodOverride('_method'));
-// Route to handle routing
 app.use(routes);
 
 // start and listen on the Express server
