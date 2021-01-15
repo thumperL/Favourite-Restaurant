@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>美食地圖</title>
+  <title>美食清單</title>
 </head>
 
 <body>
@@ -16,49 +16,52 @@
         <a class="navbar-brand" href="/">
           <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
             width="30" height="30" class="d-inline-block align-top" alt="我的餐廳清單">
-          {{#if isAuthenticated}}{{ user.name }}{{/if}}的餐廳清單
+          {{#if isAuthenticated}}{{ user.name }}的{{/if}}美食清單
         </a>
         {{#if isAuthenticated}}
           <a href="/restaurants/new" class="btn btn-outline-success">創建新的餐廳</a>
-          <a href="/users/logout" class="btn btn-outline-light">Logout</a>
+          <a href="/users/logout" class="btn btn-outline-secondary">Logout</a>
         {{else}}
-          <a href="/users/login" class="btn btn-outline-light">Login</a>
+          <a href="/users/login" class="btn btn-outline-success">Login</a>
         {{/if}}
       </div>
     </nav>
-
-    <div class="banner"></div>
+    {{#if isAuthenticated}}
+      <div class="banner"></div>
+    {{/if}}
   </header>
 
   <!-- search bar -->
-  <div class="container search-bar sort-box d-flex justify-content-around align-items-center">
-    <div class="search-bar-outer">
-      <div class="search-bar-inner">
-        <form action="/search">
-          <h4 class="mb-2">尋找餐廳：</h4>
-          <div class="input-group">
-            <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類、地址" aria-label="Restaurant Name..."
-              value="{{ keyword }}" aria-describedby="search-button">
-            <div class="input-group-append">
-              <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+  {{#if isAuthenticated}}
+    <div class="container search-bar sort-box d-flex justify-content-around align-items-center">
+      <div class="search-bar-outer">
+        <div class="search-bar-inner">
+          <form action="/search">
+            <h4 class="mb-2">尋找餐廳：</h4>
+            <div class="input-group">
+              <input type="text" name="keyword" class="form-control" placeholder="輸入餐廳、分類、地址" aria-label="Restaurant Name..."
+                value="{{ keyword }}" aria-describedby="search-button">
+              <div class="input-group-append">
+                <button class="btn btn-major" type="submit" id="search-button"><i class="fas fa-search"></i></button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-    <div class="dropdown show restaurantSort">
-      <a class="btn btn-outline-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        排序方式
-      </a>
+      <div class="dropdown show restaurantSort">
+        <a class="btn btn-outline-primary btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          排序方式
+        </a>
 
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <div class="dropdown-item" data-href="ASC">A - Z</div>
-        <div class="dropdown-item" data-href="DESC">Z - A</div>
-        <div class="dropdown-item" data-href="byType">類別</div>
-        <div class="dropdown-item" data-href="byArea">地區</div>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <div class="dropdown-item" data-href="ASC">A - Z</div>
+          <div class="dropdown-item" data-href="DESC">Z - A</div>
+          <div class="dropdown-item" data-href="byType">類別</div>
+          <div class="dropdown-item" data-href="byArea">地區</div>
+        </div>
       </div>
     </div>
-  </div>
+  {{/if}}
   
   <!-- main area -->
   {{{ body }}}
