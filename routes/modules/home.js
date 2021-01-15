@@ -7,6 +7,7 @@ const restaurant = require('../../models/restaurant');
 
 // 定義首頁路由
 router.get('/', (req, res) => {
+  const userId = req.user._id;
   const restaurantSort = (req.query.restaurantSort === undefined) ? 'asc' : req.query.restaurantSort;
   const sort = [];
   switch (restaurantSort) {
@@ -21,7 +22,7 @@ router.get('/', (req, res) => {
       break;
   }
 
-  restaurant.find()
+  restaurant.find({ userId })
     .lean()
     .sort(...sort)
     .then((restaurants) => res.render('index', { restaurants }))

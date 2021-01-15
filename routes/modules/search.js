@@ -7,6 +7,7 @@ const restaurant = require('../../models/restaurant');
 
 // 定義 search 路由
 router.get('/', (req, res) => {
+  const userId = req.user._id;
   const { keyword } = req.query;
   const restaurantSort = (req.query.restaurantSort === undefined) ? 'asc' : req.query.restaurantSort;
   const sort = [];
@@ -25,6 +26,7 @@ router.get('/', (req, res) => {
   const regex = new RegExp(keyword, 'i'); // Have to use RegExp builder to build the if contains string filtering
   // search based on name, name_en, category, and location
   restaurant.find({
+    userId,
     $or: [
       { name: { $regex: regex } },
       { name_en: { $regex: regex } },
