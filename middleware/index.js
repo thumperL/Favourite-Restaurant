@@ -4,7 +4,7 @@ const validator = require('../libs/validate');
 const createRestaurant = async (req, res, next) => {
   const validation_rule = {
     // body params
-    name: 'required|string|min:5',
+    name: 'required|string',
     name_en: 'required|string',
     category: 'required|string',
     image: 'required|url',
