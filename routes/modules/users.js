@@ -10,10 +10,24 @@ const User = require('../../models/user');
 router.get('/login', (req, res) => {
   res.render('login');
 });
-router.post('/login', passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/users/login',
-}));
+router.post('/login', (req, res, next) => {
+  passport.authenticate('local', (err, user, msg) => {
+    if (err) {
+      return next(err);
+    }
+    // Auth Failed
+    if (!user) {
+      req.flash('warning_msg', msg.message);
+      res.redirect('login');
+    }
+    req.login(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect('/');
+    });
+  })(req, res, next);
+});
 
 // Logout
 router.get('/logout', (req, res) => {
@@ -31,7 +45,7 @@ router.post('/register', (req, res) => {
     name, email, password, confirmPassword,
   } = req.body;
   const errors = [];
-  if (!name || !email || !password || !confirmPassword) {
+  if (!email || !password || !confirmPassword) {
     errors.push({ message: '所有欄位都是必填。' });
   }
   if (password !== confirmPassword) {
