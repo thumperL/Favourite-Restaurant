@@ -9,17 +9,19 @@ const restaurant = require('../../models/restaurant');
 router.get('/', (req, res) => {
   const userId = req.user._id;
   const { keyword } = req.query;
-  const restaurantSort = (req.query.restaurantSort === undefined) ? 'asc' : req.query.restaurantSort;
   const sort = [];
-  switch (restaurantSort) {
-    case 'byType':
+  switch (req.query.sort) {
+    case undefined:
+      sort.push({ _id: 'asc' });
+      break;
+    case 'type':
       sort.push({ category: 'asc' });
       break;
-    case 'byArea':
+    case 'area':
       sort.push({ location: 'asc' });
       break;
     default:
-      sort.push({ _id: restaurantSort });
+      sort.push({ _id: req.query.sort });
       break;
   }
 

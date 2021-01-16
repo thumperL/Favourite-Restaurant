@@ -8,18 +8,18 @@ $(() => {
   }
 
   // SORTING Dropdown box handling
-  if (document.querySelectorAll('.restaurantSort .dropdown-menu .dropdown-item').length > 0) {
-    document.querySelectorAll('.restaurantSort .dropdown-menu .dropdown-item').forEach((item) => {
+  if (document.querySelectorAll('.sort .dropdown-menu .dropdown-item').length > 0) {
+    document.querySelectorAll('.sort .dropdown-menu .dropdown-item').forEach((item) => {
       const searchParams = new URLSearchParams(window.location.search);
 
       // Set selected sorting option
-      if (item.dataset.href === searchParams.get('restaurantSort')) {
+      if (item.dataset.href === searchParams.get('sort')) {
         item.classList.add('active');
       }
 
       // Hook click event for page reload
       item.addEventListener('click', (event) => {
-        searchParams.set('restaurantSort', item.dataset.href);
+        searchParams.set('sort', item.dataset.href);
         window.location.search = searchParams.toString();
       });
     });
