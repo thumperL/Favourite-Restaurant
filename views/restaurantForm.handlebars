@@ -1,4 +1,5 @@
-<form action="/restaurants{{#if restaurantData._id}}/{{ restaurantData._id }}?_method=PUT{{/if}}" method="POST" class="container mt-5 mb-4">
+<form action="/{{#if restaurantData._id}}{{ restaurantData._id }}?_method=PUT{{/if}}" method="POST"
+  class="container mt-5 mb-4">
   {{#if error}}
     <div class="alert alert-danger" role="alert">
       {{#each error}}
@@ -8,43 +9,43 @@
   {{/if}}
   <div class="form-group">
     <label for="name">餐廳名稱</label>
-    <input type="text" class="form-control" placeholder="餐廳名稱" name="name" required{{#if restaurantData.name}} value="{{restaurantData.name}}"{{/if}}>
+    <input type="text" class="form-control" placeholder="餐廳名稱" name="name" required {{#if restaurantData.name}} value="{{restaurantData.name}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="name_en">餐廳英文名稱</label>
-    <input type="text" class="form-control" placeholder="餐廳英文名稱" name="name_en" required{{#if restaurantData.name_en}} value="{{restaurantData.name_en}}"{{/if}}>
+    <input type="text" class="form-control" placeholder="餐廳英文名稱" name="name_en" required {{#if restaurantData.name_en}} value="{{restaurantData.name_en}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="category">料理類別</label>
-    <input type="text" class="form-control" placeholder="料理類別" name="category" required{{#if restaurantData.category}} value="{{restaurantData.category}}"{{/if}}>
+    <input type="text" class="form-control" placeholder="料理類別" name="category" required {{#if restaurantData.category}}value="{{restaurantData.category}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="image">照片URL</label>
-    <input type="url" class="form-control" placeholder="照片URL" name="image" required{{#if restaurantData.image}} value="{{restaurantData.image}}"{{/if}}>
+    <input type="url" class="form-control" placeholder="照片URL" name="image" required {{#if restaurantData.image}}value="{{restaurantData.image}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="location">地址</label>
-    <input type="text" class="form-control" placeholder="地址" name="location" required{{#if restaurantData.location}} value="{{restaurantData.location}}"{{/if}}>
+    <input type="text" class="form-control" placeholder="地址" name="location" required {{#if restaurantData.location}}value="{{restaurantData.location}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="phone">聯絡號碼</label>
-    <input type="tel" class="form-control" placeholder="聯絡號碼" name="phone"{{#if restaurantData.phone}} value="{{restaurantData.phone}}"{{/if}}>
+    <input type="tel" class="form-control" placeholder="聯絡號碼" name="phone" {{#if restaurantData.phone}}value="{{restaurantData.phone}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="google_map">Google Maps URL</label>
-    <input type="url" class="form-control" placeholder="Google Maps URL" name="google_map"{{#if restaurantData.google_map}} value="{{restaurantData.google_map}}"{{/if}}>
+    <input type="url" class="form-control" placeholder="Google Maps URL" name="google_map" {{#if restaurantData.google_map}} value="{{restaurantData.google_map}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="rating">評比分數</label>
-    <input type="number" class="form-control" placeholder="評比分數" name="rating" min="0" max="5"{{#if restaurantData.rating}} value="{{restaurantData.rating}}"{{/if}}>
+    <input type="number" class="form-control" placeholder="評比分數" name="rating" min="0" max="5" step=0.1 {{#if restaurantData.rating}}value="{{restaurantData.rating}}" {{/if}}>
   </div>
   <div class="form-group">
     <label for="description">簡介</label>
     <textarea name="description" class="form-control" rows="5">{{#if restaurantData.description}}{{restaurantData.description}}{{/if}}</textarea>
   </div>
   <div class="form-group">
-    
-    
+
+
   </div>
   <button type="submit" class="btn btn-success">Save</button>
   <a href="/" class="btn btn-danger">back</a>

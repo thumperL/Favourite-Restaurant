@@ -2,10 +2,11 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 mb-3 mx-auto">
-      <a href="/restaurants/{{ restaurants._id }}/edit" class="btn btn-outline-primary pt-0 pb-0">
-        <i class="fas fa-edit"></i> Edit 
+      <a href="/{{ restaurants._id }}/edit" class="btn btn-outline-primary pt-0 pb-0">
+        <i class="fas fa-edit"></i> Edit
       </a>
-      <form action="/restaurants/{{ restaurants._id }}?_method=DELETE" method="POST" style="display: inline;" onsubmit="return confirm('Do you really want to delete this restaurant?');">
+      <form action="/{{ restaurants._id }}?_method=DELETE" method="POST" style="display: inline;"
+        onsubmit="return confirm('Do you really want to delete this restaurant?');">
         <button class="btn btn-outline-danger pt-0 pb-0" type="submit"><i class="far fa-trash-alt"></i> Delete </button>
       </form>
       <a class="btn btn-outline-secondary pt-0 pb-0" href="/">back</a>
@@ -47,7 +48,8 @@
         {{ restaurants.description }}
       </p>
 
-      <img class="rounded mx-auto d-block mb-4 w-100" src="{{ restaurants.image }}" alt="{{ restaurants.name }}" style="max-width: 600px;">
+      <img class="rounded mx-auto d-block mb-4 w-100" src="{{ restaurants.image }}" alt="{{ restaurants.name }}"
+        style="max-width: 600px;">
     </div>
   </div>
 </div>
