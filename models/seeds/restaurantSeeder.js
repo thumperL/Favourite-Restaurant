@@ -35,18 +35,12 @@ db.once('open', () => {
       .then((user) => {
         const userId = user._id;
         return Promise.all(
-          Array.from({ length: 3 }, (_, i) => restaurant.create({
-            name: `${restaurantList.results[(i + (index * 3))].name}`,
-            name_en: `${restaurantList.results[(i + (index * 3))].name_en}`,
-            category: `${restaurantList.results[(i + (index * 3))].category}`,
-            image: `${restaurantList.results[(i + (index * 3))].image}`,
-            location: `${restaurantList.results[(i + (index * 3))].location}`,
-            phone: `${restaurantList.results[(i + (index * 3))].phone}`,
-            google_map: `${restaurantList.results[(i + (index * 3))].google_map}`,
-            rating: `${restaurantList.results[(i + (index * 3))].rating}`,
-            description: `${restaurantList.results[(i + (index * 3))].description}`,
-            userId,
-          })),
+          Array.from(
+            { length: 3 },
+            (_, i) => restaurant.create(
+              { ...restaurantList.results[(i + (index * 3))], userId },
+            ),
+          ),
         );
       })
       .then(() => {
