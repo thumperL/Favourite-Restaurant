@@ -31,7 +31,7 @@
                   <a href="./restaurants/{{ this._id }}/edit" class="btn btn-outline-primary btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="Edit the restaurant">
                     <i class="fas fa-edit"></i>
                   </a>
-                  <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;">
+                  <form action="./restaurants/{{ this._id }}?_method=DELETE" method="POST" style="display: inline;" onsubmit="return confirm('Do you really want to delete this restaurant?');">
                     <button class="btn btn-outline-danger btn-sm pt-0 pb-0" data-toggle="tooltip" data-placement="bottom" title="Delete the restaurant" type="submit"><i class="far fa-trash-alt"></i></button>
                   </form>
                 </div>
