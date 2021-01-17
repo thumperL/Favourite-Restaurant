@@ -9,6 +9,8 @@ const validator = require('../../middleware');
 // 定義首頁路由
 router.get('/', (req, res) => {
   const userId = req.user._id;
+  const { keyword } = req.query;
+
   const sort = [];
   switch (req.query.sort) {
     case undefined:
@@ -25,11 +27,31 @@ router.get('/', (req, res) => {
       break;
   }
 
-  restaurant.find({ userId })
-    .lean()
-    .sort(...sort)
-    .then((restaurants) => res.render('index', { restaurants }))
-    .catch((error) => console.error(error));
+  if (keyword !== undefined) {
+    const regex = new RegExp(keyword, 'i'); // Have to use RegExp builder to build the if contains string filtering
+    // search based on name, name_en, category, and location
+    restaurant.find({
+      userId,
+      $or: [
+        { name: { $regex: regex } },
+        { name_en: { $regex: regex } },
+        { category: { $regex: regex } },
+        { location: { $regex: regex } },
+      ],
+    })
+      .lean()
+      .sort(...sort)
+      .then((restaurants) => {
+        res.render('index', { restaurants, keyword });
+      })
+      .catch((error) => console.error(error));
+  } else {
+    restaurant.find({ userId })
+      .lean()
+      .sort(...sort)
+      .then((restaurants) => res.render('index', { restaurants }))
+      .catch((error) => console.error(error));
+  }
 });
 
 // CREATE Operation
